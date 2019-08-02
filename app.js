@@ -43,43 +43,43 @@ async function scrapeLyrics(url) {
 }
 
 var instructionsNewVisitor = function (req, res) {
-        var params = querystring.parse(url.parse(req.url).query); //parses params
-        var urlscrape = '';
-        res.writeHead(200, {
-            "Content-Type": "text/plain"
-        });
+    var params = querystring.parse(url.parse(req.url).query); //parses params
+    var urlscrape = '';
+    res.writeHead(200, {
+        "Content-Type": "text/plain"
+    });
 
-        if ('action' in params) {
-            if (params.action == "search") {
-                console.log('');
-                try{
-                    console.log("Request Received: " + params.name)
-                    console.log("Waiting for Genius API...");
-                    getData(params.name).then(data => {
-                        urlscrape = data.hits[0].result.url;
-                        console.log("URL Found:" + urlscrape);
-                        console.log('Waiting for Genius Site...');
-                        return scrapeLyrics(urlscrape);
+    if ('action' in params) {
+        if (params.action == "search") {
+            console.log('');
+            try{
+                console.log("Request Received: " + params.name)
+                console.log("Waiting for Genius API...");
+                getData(params.name).then(data => {
+                    urlscrape = data.hits[0].result.url;
+                    console.log("URL Found:" + urlscrape);
+                    console.log('Waiting for Genius Site...');
+                    return scrapeLyrics(urlscrape);
+                })
+                    .then(finalresult => {
+                        res.write(urlscrape + '\n \n');
+                        res.write(finalresult.substring(37));
+                        res.end();
+                        console.log('Request Served!');
+                        console.log('');
                     })
-                        .then(finalresult => {
-                            res.write(urlscrape + '\n \n');
-                            res.write(finalresult.substring(37));
-                            res.end();
-                            console.log('Request Served!');
-                            console.log('');
-                        })
-                        .catch(e => {
-                            console.log(e);
-                        });
-
-                }
-                catch(err){
-                    console.log(err);
-                }
-                
+                    .catch(e => {
+                        console.log(e);
+                    });
 
             }
+            catch(err){
+                console.log(err);
+            }
+            
+
         }
+    }
 };
 
 var server = http.createServer(instructionsNewVisitor);
