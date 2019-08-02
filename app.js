@@ -53,7 +53,7 @@ var instructionsNewVisitor = function (req, res) {
         if (params.action == "search") {
             console.log('');
             try{
-                console.log("Request Received: " + params.name)
+                console.log("Request Received: " + params.name);
                 console.log("Waiting for Genius API...");
                 getData(params.name).then(data => {
                     urlscrape = data.hits[0].result.url;
