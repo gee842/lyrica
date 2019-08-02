@@ -1,5 +1,5 @@
 # lyrica
-node based app to grab lyrics from genius api
+Node based api to grab lyrics from the Genius API
 
 ## setup
 Get a GeniusAPI access token
