@@ -23,6 +23,6 @@ http://localhost:8081/?action=search&name=${YOUR_SEARCH_QUERY}
 
 The most lightweight lyric finder possible, just sends you pure text.
 
-Stop eating away art your precious data plan, get only what you were looking for: just lyrics.
+Stop eating away at your precious data plan, get only what you were looking for: just lyrics.
 
 I will never run ads, this costs me nothing and therefore should make me nothing. (Also means I won't pay for marketing this, so share with your friends if you enjoy it)
