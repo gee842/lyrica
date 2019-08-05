@@ -55,7 +55,7 @@ var instructionsNewVisitor = function (req, res) {
     var params = querystring.parse(url.parse(req.url).query); //parses params
     var urlscrape = '';
     res.writeHead(200, {
-        "Content-Type": "text/plain"
+        "Content-Type": "text/plain; charset=utf-8" 
     });
     if ('action' in params) {
         //Returns the lyrics for the top result of the search query
