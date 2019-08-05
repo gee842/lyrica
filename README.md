@@ -17,3 +17,12 @@ To Run:
 To use:
 
 http://localhost:8081/?action=search&name=${YOUR_SEARCH_QUERY}
+
+
+## Hosted At: https://gee842.github.io/landing/lyrica-home.html
+
+The most lightweight lyric finder possible, just sends you pure text.
+
+Stop eating away art your precious data plan, get only what you were looking for: just lyrics.
+
+I will never run ads, this costs me nothing and therefore should make me nothing.
