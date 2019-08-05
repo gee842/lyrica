@@ -107,5 +107,6 @@ var instructionsNewVisitor = function (req, res) {
     }
 };
 var server = http.createServer(instructionsNewVisitor);
+
 server.listen(process.env.PORT || port)
-console.log("Listening on Port " + port);
+console.log("Listening on Port " + (process.env.PORT || port));
