@@ -57,7 +57,6 @@ var instructionsNewVisitor = function (req, res) {
     res.writeHead(200, {
         "Content-Type": "text/plain"
     });
-
     if ('action' in params) {
         //Returns the lyrics for the top result of the search query
         if (params.action == "search") {
