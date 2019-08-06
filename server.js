@@ -113,6 +113,11 @@ var instructionsNewVisitor = function (req, res) {
         
 
         }
+        else if (action == "wake")
+        {
+            console.log("Server Awoken");
+            res.end();
+        }
         //Todo: Search for Album, and grabs all songs on it.
     }
 };
