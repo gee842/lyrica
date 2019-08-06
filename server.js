@@ -56,7 +56,7 @@ var instructionsNewVisitor = function (req, res) {
     var params = querystring.parse(url.parse(req.url).query); //parses params
     var urlscrape = '';
     res.writeHead(200, {
-        "Content-Type": "text/plain; charset=utf-8" 
+        "Content-Type": "text/html; charset=utf-8" 
     });
     if ('action' in params) {
         //Returns the lyrics for the top result of the search query
@@ -94,10 +94,10 @@ var instructionsNewVisitor = function (req, res) {
                             songtitle += songarray[i].charAt(0).toUpperCase() + songarray[i].slice(1) + " ";
                         }
                         
-                        res.write(songtitle + '\n \n');
-                        res.write(finalresult + '\n');
+                        res.write('<h3 style="font-family:Verdana;">' + songtitle + '</h3><hr>');
+                        res.write('<p style="font-family:Verdana;">' + finalresult.replace(/[\n\r]/g, '<br>').replace(/\[/g, '<b>[').replace(/\]/g, ']</b>'));
                         requests_served++;
-                        res.write("Served total of: " + requests_served.toString() + " requests since last restart");
+                        res.write("<hr> Served total of: " + requests_served.toString() + " requests since last restart </p>");
                         res.end();
                         console.log('Request Served: ' + requests_served);
                         console.log('');
