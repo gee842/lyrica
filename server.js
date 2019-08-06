@@ -15,6 +15,7 @@ var accessToken;
 const port = 8081;
 var Datastore = require('nedb-promises');
 var cachefile = Datastore.create(LYRIC_CACHE_FILE);
+var requests_served = 0;
 
 fs.readFile(ACCESS_TOKEN_FILE, function (err, buff) {
     if (err){console.log(err);}
@@ -94,9 +95,11 @@ var instructionsNewVisitor = function (req, res) {
                         }
                         
                         res.write(songtitle + '\n \n');
-                        res.write(finalresult);
+                        res.write(finalresult + '\n');
+                        requests_served++;
+                        res.write("Served total of: " + requests_served.toString() + " requests since last restart");
                         res.end();
-                        console.log('Request Served!');
+                        console.log('Request Served: ' + requests_served);
                         console.log('');
                 })
                 .catch(e => {
