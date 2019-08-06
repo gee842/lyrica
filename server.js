@@ -62,6 +62,8 @@ var instructionsNewVisitor = function (req, res) {
         if (params.action == "search") {
             console.log('');
             try{
+                var songtitle = '';
+                var songarray = [];
                 console.log("Request Received: " + params.name);
                 console.log("Waiting for Genius API...");
                 getData(params.name)
@@ -86,7 +88,12 @@ var instructionsNewVisitor = function (req, res) {
                     }
                 })
                 .then(finalresult => {
-                        res.write(urlscrape + '\n \n');
+                        songarray = urlscrape.substring(19).split('-');
+                        for (let i = 0; i<songarray.length; i++){
+                            songtitle += songarray[i].charAt(0).toUpperCase() + songarray[i].slice(1);
+                        }
+                        
+                        res.write(songtitle + '\n \n');
                         res.write(finalresult);
                         res.end();
                         console.log('Request Served!');
