@@ -90,8 +90,8 @@ var instructionsNewVisitor = function (req, res) {
                 })
                 .then(finalresult => {
                         songarray = urlscrape.substring(19).split('-');
-                        for (let i = 0; i<songarray.length; i++){
-                            songtitle += songarray[i].charAt(0).toUpperCase() + songarray[i].slice(1);
+                        for (let i = 0; i<songarray.length-1; i++){
+                            songtitle += songarray[i].charAt(0).toUpperCase() + songarray[i].slice(1) + " ";
                         }
                         
                         res.write(songtitle + '\n \n');
