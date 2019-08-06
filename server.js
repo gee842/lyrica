@@ -113,7 +113,7 @@ var instructionsNewVisitor = function (req, res) {
         
 
         }
-        else if (action == "wake")
+        else if (params.action == "wake")
         {
             console.log("Server Awoken");
             res.end();
@@ -123,5 +123,5 @@ var instructionsNewVisitor = function (req, res) {
 };
 var server = http.createServer(instructionsNewVisitor);
 
-server.listen(process.env.PORT || port)
+server.listen(process.env.PORT || port);
 console.log("Listening on Port " + (process.env.PORT || port));
