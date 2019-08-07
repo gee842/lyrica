@@ -128,10 +128,10 @@ var instructionsNewVisitor = function (req, res) {
                         res.write('<body><h3 style="font-family:Verdana;display:inline" >' + songtitle + '</h3>');
                     res.write('&nbsp; &nbsp; &nbsp; &nbsp;' + searchBarHtml);
                         res.write(buttonHtml);
-                        res.write('<hr>')
+                        res.write('<hr>');
                         res.write('<p style="font-family:Verdana;">' + finalresult.replace(/[\n\r]/g, '<br>').replace(/\[/g, '<b>[').replace(/\]/g, ']</b>'));
                         requests_served++;
-                        res.write("<hr> Served total of: " + requests_served.toString() + " requests since last restart </p>");
+                        res.write("<hr> Made Possible by the Genius API <br> Served total of: " + requests_served.toString() + " requests since last restart </p>");
                         res.end('</body>');
                         console.log('Request Served: ' + requests_served);
                         console.log('');
