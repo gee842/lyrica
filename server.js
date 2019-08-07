@@ -102,6 +102,10 @@ var instructionsNewVisitor = function (req, res) {
                 console.log("Waiting for Genius API...");
                 getData(params.name)
                 .then(data => {
+                    if (data.hits.length == 0){
+                        
+                        throw new Error('No Results Found');
+                    }
                     urlscrape = data.hits[0].result.url;
                     console.log("URL Found: " + urlscrape);
                     return urlscrape;
@@ -138,7 +142,12 @@ var instructionsNewVisitor = function (req, res) {
                         console.log('');
                 })
                 .catch(e => {
+                    res.write('<h3 style="font-family:Verdana;">(Surprisingly) No Results Found!</h3><hr>');
+                    res.write(searchBarHtml);
+                    res.write(buttonHtml);
+                    res.end();
                     console.log(e);
+                    console.log('(Surprisingly) No Results Found!');
                 });
             }
             catch(err){
