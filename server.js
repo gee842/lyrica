@@ -10,13 +10,15 @@ var querystring = require('querystring');
 const api = require('genius-api');
 var cheerio = require('cheerio');
 var axios = require('axios');
+var path = require('path');
+
 var genius;
 var accessToken;
 const port = 8081;
 var Datastore = require('nedb-promises');
 var cachefile = Datastore.create(LYRIC_CACHE_FILE);
 var requests_served = 0;
-
+var FAVICON = path.join(__dirname, 'public', 'favicon.ico');
 const buttonHtml = `
 <script>document.getElementById('clicky').onclick = function(){
         var queryvalue = document.getElementById('fieldy').value;
@@ -78,14 +80,34 @@ async function scrapeLyrics(url) {
 var instructionsNewVisitor = function (req, res) {
     var params = querystring.parse(url.parse(req.url).query); //parses params
     var urlscrape = '';
+    var pathname = url.parse(req.url).pathname;
+    if (req.method === 'GET' && pathname === '/favicon.ico') {
+        // MIME type of your favicon.
+        //
+        // .ico = 'image/x-icon' or 'image/vnd.microsoft.icon'
+        // .png = 'image/png'
+        // .jpg = 'image/jpeg'
+        // .jpeg = 'image/jpeg'
+        res.setHeader('Content-Type', 'image/x-icon');
+
+        // Serve your favicon and finish response.
+        //
+        // You don't need to call `.end()` yourself because
+        // `pipe` will do it automatically.
+        fs.createReadStream(FAVICON).pipe(res);
+
+        return;
+    }
+
     res.writeHead(200, {
         "Content-Type": "text/html; charset=utf-8" 
     });
     if ('action' in params) {
         //Returns the lyrics for the top result of the search query
+        
         if (params.action == "search") {
             console.log('');
-            res.write('<head><link rel="shortcut icon" type="image/png" href="/favicon.ico"/></head>')
+            res.write('<head><link rel="shortcut icon" type="image/png" href="/favicon.ico"/></head>');
             searchquery: try{
                 var songtitle = '';
                 var songarray = [];
