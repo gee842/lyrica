@@ -126,8 +126,8 @@ var instructionsNewVisitor = function (req, res) {
                             songtitle += songarray[i].charAt(0).toUpperCase() + songarray[i].slice(1) + " ";
                         }
                         res.write('<body><h3 style="font-family:Verdana;display:inline" >' + songtitle + '</h3>');
-                        res.write(searchBarHtml);
-                        res.write('&nbsp; &nbsp; &nbsp; &nbsp;' + buttonHtml);
+                    res.write('&nbsp; &nbsp; &nbsp; &nbsp;' + searchBarHtml);
+                        res.write(buttonHtml);
                         res.write('<hr>')
                         res.write('<p style="font-family:Verdana;">' + finalresult.replace(/[\n\r]/g, '<br>').replace(/\[/g, '<b>[').replace(/\]/g, ']</b>'));
                         requests_served++;
