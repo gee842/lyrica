@@ -107,7 +107,7 @@ var instructionsNewVisitor = function (req, res) {
         
         if (params.action == "search") {
             console.log('');
-            res.write('<head><link rel="shortcut icon" type="image/png" href="/favicon.ico"/></head>');
+            res.write('<head><link rel="shortcut icon" type="image/png" href="/favicon.ico"/><title>Lyrica - The world\'s most lightweight Lyric Finder</title ></head>');
             searchquery: try{
                 var songtitle = '';
                 var songarray = [];
