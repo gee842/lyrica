@@ -17,6 +17,29 @@ var Datastore = require('nedb-promises');
 var cachefile = Datastore.create(LYRIC_CACHE_FILE);
 var requests_served = 0;
 
+const buttonHtml = `
+<script>document.getElementById('clicky').onclick = function(){
+        var queryvalue = document.getElementById('fieldy').value;
+        window.location= window.location.href.split('?')[0] + '?action=search&name=' + queryvalue;
+    }
+    document.getElementById('fieldy').addEventListener("keyup", function (event) {
+                // Number 13 is the "Enter" key on the keyboard 
+                if (event.keyCode === 13) {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    document.getElementById("clicky").click();
+                }
+            });
+    document.getElementById('fieldy').value = '';
+</script>
+`;
+const searchBarHtml = `
+<p style="display:inline" ></p><input type="text" name="fname" id ="fieldy" autofocus>
+    <button id="clicky">Search</button>
+
+`;
+
 fs.readFile(ACCESS_TOKEN_FILE, function (err, buff) {
     if (err){console.log(err);}
     accessToken = buff;
@@ -62,9 +85,18 @@ var instructionsNewVisitor = function (req, res) {
         //Returns the lyrics for the top result of the search query
         if (params.action == "search") {
             console.log('');
-            try{
+            searchquery: try{
                 var songtitle = '';
                 var songarray = [];
+                if (params.name == ''){
+                    res.write('<h3 style="font-family:Verdana;">Please Enter a Search Term...</h3><hr>');
+                    res.write(searchBarHtml);
+                    res.write(buttonHtml);
+                    res.end();
+                    console.log('No search term Received');
+                    break searchquery;
+
+                }
                 console.log("Request Received: " + params.name);
                 console.log("Waiting for Genius API...");
                 getData(params.name)
@@ -93,12 +125,14 @@ var instructionsNewVisitor = function (req, res) {
                         for (let i = 0; i<songarray.length-1; i++){
                             songtitle += songarray[i].charAt(0).toUpperCase() + songarray[i].slice(1) + " ";
                         }
-                        
-                        res.write('<h3 style="font-family:Verdana;">' + songtitle + '</h3><hr>');
+                        res.write('<body><h3 style="font-family:Verdana;display:inline" >' + songtitle + '</h3>');
+                        res.write(searchBarHtml);
+                        res.write('&nbsp; &nbsp; &nbsp; &nbsp;' + buttonHtml);
+                        res.write('<hr>')
                         res.write('<p style="font-family:Verdana;">' + finalresult.replace(/[\n\r]/g, '<br>').replace(/\[/g, '<b>[').replace(/\]/g, ']</b>'));
                         requests_served++;
                         res.write("<hr> Served total of: " + requests_served.toString() + " requests since last restart </p>");
-                        res.end();
+                        res.end('</body>');
                         console.log('Request Served: ' + requests_served);
                         console.log('');
                 })
