@@ -85,6 +85,7 @@ var instructionsNewVisitor = function (req, res) {
         //Returns the lyrics for the top result of the search query
         if (params.action == "search") {
             console.log('');
+            res.write('<head><link rel="shortcut icon" type="image/png" href="/favicon.ico"/></head>')
             searchquery: try{
                 var songtitle = '';
                 var songarray = [];
