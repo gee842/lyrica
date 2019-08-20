@@ -1,13 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description"
         content="Lyrica - The world's most lightweight Lyric Finder: Save your data plan, get the lyrics you want!">
     <title>Lyrica - The world's most lightweight Lyric Finder</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145186485-1"></script>
     <script>
-        console.log("Redirecting...");
-        window.location = "https://gee842.github.io/landing/lyrica/";
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-145186485-1');
     </script>
-    <meta http-equiv="refresh" content="0; URL='https://gee842.github.io/landing/lyrica/'" />
+
 </head>
+<body>
+    <h1 style="font-family:Verdana;">Lyrica - The world's most lightweight Lyric Finder!</h1>
+    <hr>
+    Search for a Song Lyric: <input type="text" name="fname" id ="fieldy" autofocus>
+    <button id="clicky">Search</button>
+    
+    
+    <p style="font-family:Verdana;">Enter any combination of song lyrics, artist name, or song title!<br>The most
+        lightweight lyric finder possible, Stop eating away at your precious data plan, get only what you were looking
+        for: just lyrics.
+        <hr>
+    I will never run ads. (Also means I won't pay for marketing
+    this, so share with your friends if you enjoy it) <br></p>
+    <p><a href="https://github.com/gee842">Ethan Ooi 2019</a> GNU General Public License 3.0, use my code however you
+            wish. <br> Made possible by the Genius API</p>
+
+    
+</body>
+<script>document.getElementById('clicky').onclick = function(){
+    var queryvalue = document.getElementById('fieldy').value;
+    window.location='https://lyric-a.herokuapp.com/?action=search&name='+queryvalue;
+}
+document.getElementById('fieldy').addEventListener("keyup", function (event) {
+    // Number 13 is the "Enter" key on the keyboard 
+    if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.getElementById("clicky").click();
+    }
+});
+document.getElementById('fieldy').value = '';
+
+</script>
+<script src="https://lyric-a.herokuapp.com/?action=wake"></script>
 </html>
