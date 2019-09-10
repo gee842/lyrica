@@ -19,7 +19,7 @@ To use:
 http://localhost:8081/?action=search&name=${YOUR_SEARCH_QUERY}
 
 
-## Hosted At: https://gee842.github.io/landing/lyrica/
+## Hosted At: https://gee842.github.io/lyrica/
 
 The most lightweight lyric finder possible, just sends you pure text.
 
