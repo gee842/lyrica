@@ -1,16 +1,16 @@
-# lyrica
+# Lyrica
 Node based api to grab lyrics from the Genius API
 
 Uses NeDB as an on-disk cache to bypass scraping Genius, if the lyric had been scraped before.
 
 Completely Asynchronous, handles multiple requests simultaneously.
 
-## setup
+## Setup
 Get a GeniusAPI access token
 
 Add a 'accesstoken.txt' at the project root.
 
-## usage
+## Usage
 To Run:
 ```node server.js```
 
